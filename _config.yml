@@ -1,0 +1,27 @@
+# GitHub Pages Configuration
+# https://docs.github.com/en/pages
+
+title: Soumya Shailendra
+description: >
+  Personal academic website of Soumya Rachel Shailendra, PhD Candidate
+  in Comparative Literary Studies at Northwestern University. Writer,
+  scholar, and arts programmer specializing in postcolonial theory,
+  South Asian literature, and the histories of caste radicalism.
+
+url: "" # Replace with: https://yourusername.github.io
+baseurl: "" # Leave empty for user site (username.github.io), or set to /repo-name for project site
+
+# Build settings
+theme: null   # No Jekyll theme — we're using custom HTML
+plugins: []
+
+# Exclude files from the Jekyll build
+exclude:
+  - README.md
+  - "*.sh"
+  - ".git"
+  - ".gitignore"
+
+# Include the HTML file
+include:
+  - index.html

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soumya Shailendra — Scholar & Writer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700;1,900&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --forest:   #1d3a2a;
+      --deep:     #0f1f17;
+      --leaf:     #2e5c3e;
+      --mint:     #d6ede0;
+      --white:    #f8f8f4;
+      --vermil:   #c0392b;
+      --vermil2:  #e74c3c;
+      --cream:    #faf7f0;
+      --text:     #1a1a18;
+      --muted:    #5a6e60;
+      --rule:     #b8d4c0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --instr: 'Instrument Serif', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--vermil);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s, background 0.25s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--forest);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s, height 0.25s;
+      opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5rem;
+      mix-blend-mode: multiply;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--forest);
+      text-decoration: none;
+      line-height: 1.1;
+    }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--forest);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--vermil);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--vermil); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--forest);
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .hero-vert {
+      position: absolute;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center center;
+      font-family: var(--sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(214, 237, 224, 0.3);
+      white-space: nowrap;
+    }
+    .hero-bg-num {
+      position: absolute;
+      right: -0.05em;
+      bottom: -0.15em;
+      font-family: var(--serif);
+      font-size: clamp(18rem, 28vw, 32rem);
+      font-weight: 900;
+      line-height: 1;
+      color: rgba(46, 92, 62, 0.4);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 5rem 5rem 8rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-tag {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--vermil2);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: slideIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards 0.3s;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(4rem, 9vw, 10rem);
+      font-weight: 900;
+      line-height: 0.88;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.15em;
+      opacity: 0;
+      animation: slideIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards 0.45s;
+    }
+    .hero-name-italic {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--mint);
+      display: block;
+    }
+    .hero-divider-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 2.5rem 0;
+      opacity: 0;
+      animation: slideIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards 0.6s;
+    }
+    .hero-rule { flex: 1; height: 1px; background: rgba(214,237,224,0.2); }
+    .hero-subtitle {
+      font-family: var(--instr);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--mint);
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+    .hero-desc {
+      max-width: 560px;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(214,237,224,0.75);
+      margin-bottom: 3rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: slideIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards 0.75s;
+    }
+    .hero-actions {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      opacity: 0;
+      animation: slideIn 0.9s cubic-bezier(0.22,1,0.36,1) forwards 0.9s;
+    }
+    .btn-red {
+      display: inline-block;
+      padding: 0.8rem 2.2rem;
+      background: var(--vermil);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-red:hover { background: var(--vermil2); transform: translateY(-3px); }
+    .btn-outline-light {
+      display: inline-block;
+      padding: 0.8rem 2.2rem;
+      border: 1px solid rgba(214,237,224,0.4);
+      color: var(--mint);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline-light:hover { border-color: var(--mint); color: #fff; transform: translateY(-3px); }
+
+    .hero-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(214,237,224,0.12);
+      position: relative; z-index: 2;
+    }
+    .hero-bar-item {
+      padding: 1.6rem 2rem;
+      border-right: 1px solid rgba(214,237,224,0.08);
+    }
+    .hero-bar-item:last-child { border-right: none; }
+    .hbi-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(214,237,224,0.35);
+      margin-bottom: 0.35rem;
+    }
+    .hbi-value {
+      font-family: var(--instr);
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--mint);
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      min-height: 100vh;
+    }
+    .about-sidebar-col {
+      background: var(--deep);
+      padding: 6rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .sidebar-section-num {
+      font-family: var(--serif);
+      font-size: 6rem;
+      font-weight: 900;
+      color: rgba(214,237,224,0.07);
+      line-height: 1;
+      margin-bottom: -1rem;
+    }
+    .sidebar-section-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--mint);
+      margin-bottom: 3rem;
+    }
+    .sidebar-meta-item { margin-bottom: 2rem; }
+    .smi-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(214,237,224,0.3);
+      margin-bottom: 0.4rem;
+    }
+    .smi-val {
+      font-size: 0.88rem;
+      color: rgba(214,237,224,0.7);
+      line-height: 1.6;
+    }
+    .smi-val a { color: var(--vermil2); text-decoration: none; }
+    .sidebar-langs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .lang-pill {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(214,237,224,0.18);
+      color: rgba(214,237,224,0.6);
+    }
+    .about-main-col { padding: 6rem 5rem; }
+    .about-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--vermil);
+      margin-bottom: 1rem;
+    }
+    .about-headline {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--forest);
+      margin-bottom: 2.5rem;
+    }
+    .about-lead {
+      font-family: var(--instr);
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      border-left: 3px solid var(--vermil);
+      padding-left: 1.5rem;
+    }
+    .about-body p {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 1.4rem;
+    }
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2.5rem; }
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      padding: 0.4rem 1rem;
+      background: var(--mint);
+      color: var(--forest);
+      font-weight: 500;
+    }
+
+    /* RESEARCH */
+    #research { background: var(--white); padding: 8rem 5rem; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1.5rem;
+    }
+    .section-num {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--vermil);
+    }
+    .section-h {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--forest);
+    }
+    .diss-banner {
+      background: var(--forest);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .diss-banner::before {
+      content: '"';
+      position: absolute;
+      right: 2rem; top: -1rem;
+      font-family: var(--serif);
+      font-size: 18rem;
+      font-weight: 900;
+      color: rgba(46,92,62,0.35);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .diss-left {
+      background: var(--vermil);
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .diss-left-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+    }
+    .diss-left h3 {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+    }
+    .diss-right { padding: 3.5rem; position: relative; z-index: 1; }
+    .diss-right p {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: rgba(214,237,224,0.8);
+      font-weight: 300;
+    }
+    .research-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--rule);
+    }
+    .r-card {
+      padding: 2.5rem;
+      border-right: 1px solid var(--rule);
+      transition: background 0.25s;
+    }
+    .r-card:last-child { border-right: none; }
+    .r-card:hover { background: var(--mint); }
+    .r-card-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: rgba(29,58,42,0.07);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .r-card h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 0.8rem;
+      line-height: 1.35;
+    }
+    .r-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.75; }
+
+    /* WRITING */
+    #writing { background: var(--cream); padding: 8rem 5rem; }
+    .writing-masonry { columns: 2; column-gap: 3rem; margin-top: 1rem; }
+    .w-item {
+      break-inside: avoid;
+      margin-bottom: 2rem;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      background: var(--white);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .w-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--forest);
+      box-shadow: 6px 6px 0 var(--forest);
+    }
+    .w-venue {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--vermil);
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+    .w-item h3 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.35;
+      margin-bottom: 0.6rem;
+    }
+    .w-item p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+    .w-arrow {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--forest);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .w-item:hover .w-arrow { color: var(--vermil); }
+
+    /* PULLQUOTE */
+    .pullquote-block {
+      background: var(--forest);
+      color: var(--mint);
+      padding: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .pullquote-block::before {
+      content: '❧';
+      position: absolute;
+      right: 3rem; bottom: 1rem;
+      font-size: 8rem;
+      color: rgba(214,237,224,0.07);
+      pointer-events: none;
+    }
+    .pullquote-block blockquote {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.55;
+      max-width: 800px;
+    }
+    .pullquote-block cite {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(214,237,224,0.45);
+      font-style: normal;
+    }
+
+    /* PROJECTS */
+    #projects { background: var(--deep); padding: 8rem 5rem; }
+    #projects .section-h { color: var(--mint); }
+    #projects .section-num { color: var(--vermil2); }
+    #projects .section-header { border-color: rgba(214,237,224,0.1); }
+    .proj-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 3rem;
+      align-items: center;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(214,237,224,0.08);
+      transition: background 0.2s, padding 0.2s;
+      cursor: default;
+    }
+    .proj-row:hover {
+      background: rgba(46,92,62,0.25);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      margin: 0 -1.5rem;
+    }
+    .proj-icon { font-family: var(--serif); font-size: 2rem; color: var(--vermil2); text-align: center; }
+    .proj-body h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .proj-body p { font-size: 0.86rem; color: rgba(214,237,224,0.55); line-height: 1.7; }
+    .proj-badge {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid rgba(192,57,43,0.4);
+      color: var(--vermil2);
+      white-space: nowrap;
+    }
+
+    /* FELLOWSHIPS */
+    #fellowships { background: var(--cream); padding: 8rem 5rem; }
+    .fellowships-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .fellowships-table tr { border-bottom: 1px solid var(--rule); transition: background 0.18s; }
+    .fellowships-table tr:hover { background: var(--mint); }
+    .fellowships-table td { padding: 1.6rem 1rem; vertical-align: middle; }
+    .ft-year {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: var(--vermil);
+      text-transform: uppercase;
+      width: 140px;
+    }
+    .ft-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--forest);
+    }
+    .ft-org { font-size: 0.8rem; color: var(--muted); text-align: right; width: 220px; }
+
+    /* CONTACT */
+    #contact {
+      background: var(--forest);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      min-height: 70vh;
+    }
+    .contact-left {
+      padding: 7rem 5rem;
+      background: var(--vermil);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-left .sec-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1.2rem;
+    }
+    .contact-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 2rem;
+    }
+    .contact-left p {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      max-width: 380px;
+    }
+    .contact-link-row { display: flex; flex-direction: column; gap: 1rem; }
+    .c-link {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-decoration: none;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.1);
+      transition: background 0.2s, transform 0.2s;
+      border-left: 3px solid rgba(255,255,255,0.25);
+    }
+    .c-link:hover { background: rgba(255,255,255,0.2); transform: translateX(6px); }
+    .c-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      width: 70px;
+      flex-shrink: 0;
+    }
+    .c-val { font-size: 0.88rem; color: #fff; }
+    .contact-right { padding: 7rem 4rem; display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; }
+    .cr-stat { border-bottom: 1px solid rgba(214,237,224,0.1); padding-bottom: 2rem; }
+    .cr-stat-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .cr-stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(214,237,224,0.4);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--deep);
+      padding: 2.5rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(214,237,224,0.06);
+    }
+    footer span { font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(214,237,224,0.3); text-transform: uppercase; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(214,237,224,0.35); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--vermil2); }
+
+    /* ANIMATIONS */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      nav { padding: 1rem 2rem; }
+      .hero-content { padding: 3rem 2.5rem; }
+      .hero-bar { grid-template-columns: repeat(2, 1fr); }
+      #about { grid-template-columns: 1fr; }
+      .about-sidebar-col { position: relative; height: auto; padding: 4rem 2.5rem; }
+      .about-main-col { padding: 4rem 2.5rem; }
+      .diss-banner { grid-template-columns: 1fr; }
+      .research-cards { grid-template-columns: 1fr; }
+      .r-card { border-right: none; border-bottom: 1px solid var(--rule); }
+      .writing-masonry { columns: 1; }
+      .proj-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .proj-badge { align-self: flex-start; }
+      #contact { grid-template-columns: 1fr; }
+      .contact-left, .contact-right { padding: 4rem 2.5rem; }
+      #research, #writing, #projects, #fellowships { padding: 5rem 2.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero-name { font-size: 3.5rem; }
+      .hero-subtitle { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Soumya<br/>Shailendra</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#fellowships">Fellowships</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-num" aria-hidden="true">S</div>
+    <p class="hero-vert">PhD Candidate · Northwestern University · Comparative Literary Studies</p>
+    <div class="hero-content">
+      <p class="hero-tag">Scholar · Writer · Arts Programmer</p>
+      <h1 class="hero-name">
+        Soumya
+        <span class="hero-name-italic">Shailendra</span>
+      </h1>
+      <div class="hero-divider-row">
+        <div class="hero-rule"></div>
+        <span class="hero-subtitle">Postcolonial Theory · South Asian Literature · Anti-Caste Histories</span>
+        <div class="hero-rule"></div>
+      </div>
+      <p class="hero-desc">
+        Working at the intersection of law and literature to examine how Dalit writers 
+        contest their incorporation into institutions of liberal statehood — through a 
+        multilingual, multimodal archive spanning Hindi, Marathi, Malayalam, and English.
+      </p>
+      <div class="hero-actions">
+        <a href="#research" class="btn-red">Explore Research</a>
+        <a href="#writing" class="btn-outline-light">Read Writing</a>
+      </div>
+    </div>
+    <div class="hero-bar">
+      <div class="hero-bar-item">
+        <p class="hbi-label">Program</p>
+        <p class="hbi-value">Comparative Literary Studies</p>
+      </div>
+      <div class="hero-bar-item">
+        <p class="hbi-label">Home Dept.</p>
+        <p class="hbi-value">Asian Languages & Cultures</p>
+      </div>
+      <div class="hero-bar-item">
+        <p class="hbi-label">Advisor</p>
+        <p class="hbi-value">Prof. Laura Brueck</p>
+      </div>
+      <div class="hero-bar-item">
+        <p class="hbi-label">Fellowship</p>
+        <p class="hbi-value">Mellon Cluster, CRD</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-sidebar-col">
+      <div>
+        <div class="sidebar-section-num">01</div>
+        <div class="sidebar-section-title">About<br/>Soumya</div>
+      </div>
+      <div>
+        <div class="sidebar-meta-item">
+          <p class="smi-label">University</p>
+          <p class="smi-val">Northwestern University<br/>Evanston, Illinois</p>
+        </div>
+        <div class="sidebar-meta-item">
+          <p class="smi-label">Education</p>
+          <p class="smi-val">B.A. Literature & Drama<br/>Bennington College, Vermont</p>
+        </div>
+        <div class="sidebar-meta-item">
+          <p class="smi-label">Languages</p>
+          <div class="sidebar-langs">
+            <span class="lang-pill">English</span>
+            <span class="lang-pill">Hindi</span>
+            <span class="lang-pill">Marathi</span>
+            <span class="lang-pill">Malayalam</span>
+          </div>
+        </div>
+        <div class="sidebar-meta-item">
+          <p class="smi-label">Contact</p>
+          <p class="smi-val"><a href="mailto:SoumyaShailendra2027@u.northwestern.edu">SoumyaShailendra2027<br/>@u.northwestern.edu</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="about-main-col">
+      <p class="about-eyebrow">Who I am</p>
+      <h2 class="about-headline">Writer, Scholar,<br/>Arts Programmer</h2>
+      <p class="about-lead">
+        Soumya Rachel Shailendra is a PhD candidate in Comparative Literary Studies 
+        with a home department in Asian Languages and Cultures, specializing in postcolonial 
+        theory, modern South Asian literature, and the histories of caste radicalism.
+      </p>
+      <div class="about-body">
+        <p>Her dissertation examines how law and literature serve as important sites of reform and redress in the global anti-caste movement. Working within a multilingual and multimodal archive, she investigates how Dalit writers — authors from historically marginalized castes — deploy legal idioms to challenge their incorporation into institutions of liberal statehood.</p>
+        <p>She holds a B.A. in Literature and Drama from Bennington College, Vermont, where she was a founding student member of the Mellon Consortium on Forced Migration, Displacement, and Education (CFMDE). She also studied at Middlebury College, and has previously interned with the MANOA journal at the University of Hawai'i Press.</p>
+        <p>Soumya co-directs <em>Translators Adda</em>, a public-facing translation workshop series focused on critical issues in South Asian politics and culture across the Chicagoland region. Her collaborative work with the SpaceShift Collective raises awareness around caste violence and anti-caste cultural practice in Chicago.</p>
+      </div>
+      <div class="tag-cloud">
+        <span class="tag">Postcolonial Theory</span>
+        <span class="tag">Dalit Literature</span>
+        <span class="tag">Caste Radicalism</span>
+        <span class="tag">Law & Literature</span>
+        <span class="tag">Black Radical Tradition</span>
+        <span class="tag">Translation</span>
+        <span class="tag">Public Humanities</span>
+        <span class="tag">Memory Studies</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-h">Research</h2>
+    </div>
+    <div class="diss-banner">
+      <div class="diss-left">
+        <p class="diss-left-label">Dissertation Project</p>
+        <h3>Law, Literature &amp; the Global Anti-Caste Movement</h3>
+      </div>
+      <div class="diss-right">
+        <p>This dissertation examines how law and literature function as intertwined sites of reform and redress in the global anti-caste movement. Working within a multilingual, multimodal archive, the project investigates how Dalit writers deploy legal idioms — rights claims, constitutional language, juridical procedure — to contest their incorporation into institutions of liberal statehood. Texts span Hindi, Marathi, English, and Malayalam, engaging a transnational archive of anti-caste thought.</p>
+      </div>
+    </div>
+    <div class="research-cards">
+      <div class="r-card">
+        <div class="r-card-num">I</div>
+        <h3>Black Radicalism &amp; Anti-Caste Solidarity</h3>
+        <p>Tracing the transracial solidarity between the Black Power and anti-caste movements of the early 1970s, examining the "inner life" of caste in Dalit and African American writings.</p>
+      </div>
+      <div class="r-card">
+        <div class="r-card-num">II</div>
+        <h3>Mourning, Lamentation &amp; Caste Memory</h3>
+        <p>Interrogating the affective structures of caste through the sonic and formal registers of lamentation and mourning rituals in twentieth-century African American and Dalit literatures.</p>
+      </div>
+      <div class="r-card">
+        <div class="r-card-num">III</div>
+        <h3>Dalit Epistemologies &amp; Liberation Theologies</h3>
+        <p>Exploring how oppressed communities construct alternative knowledge systems and spiritual-political frameworks outside dominant institutions, drawing on decolonial thought.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-h">Writing</h2>
+    </div>
+    <div class="writing-masonry">
+      <a class="w-item" href="https://scroll.in/article/1028378/" target="_blank" rel="noopener">
+        <p class="w-venue">Scroll.in</p>
+        <h3>Anti-Caste Rapper Sumeet Samos's Memoir: An Alternate Politics of Solidarity</h3>
+        <p>A review exploring how the memoir opens new imaginaries for Dalit cultural practice and cross-caste solidarity.</p>
+        <span class="w-arrow">Read →</span>
+      </a>
+      <a class="w-item" href="https://muse.jhu.edu/article/922362" target="_blank" rel="noopener">
+        <p class="w-venue">Verge: Studies in Global Asias · JHU Press</p>
+        <h3>Peer-Reviewed Scholarship in Global Asian Studies</h3>
+        <p>Academic publication in a leading peer-reviewed humanities journal, contributing to the field of global Asian literary studies.</p>
+        <span class="w-arrow">Read →</span>
+      </a>
+      <a class="w-item" href="https://europenow.journal.columbia.edu" target="_blank" rel="noopener">
+        <p class="w-venue">EuropeNow Journal</p>
+        <h3>Dalit Literature and European Critical Thought</h3>
+        <p>Published writing connecting South Asian anti-caste literature with European theoretical frameworks and comparative literary inquiry.</p>
+        <span class="w-arrow">Read →</span>
+      </a>
+      <a class="w-item" href="https://indianexpress.com" target="_blank" rel="noopener">
+        <p class="w-venue">The Indian Express</p>
+        <h3>Public Writing on South Asian Politics &amp; Culture</h3>
+        <p>Essays and journalism engaging contemporary issues of caste, politics, and cultural life in South Asia and its diaspora.</p>
+        <span class="w-arrow">Read →</span>
+      </a>
+      <a class="w-item" href="https://medium.com/@soumyashailendra2027" target="_blank" rel="noopener">
+        <p class="w-venue">Medium</p>
+        <h3>Essays &amp; Long-Form Commentary</h3>
+        <p>Long-form writing on literature, social justice, South Asian diaspora culture, translation, and public humanities practice.</p>
+        <span class="w-arrow">Read →</span>
+      </a>
+      <a class="w-item" href="https://www.bennington.edu/events/andha-yug-staged-reading" target="_blank" rel="noopener">
+        <p class="w-venue">Dramaturgy · Bennington College</p>
+        <h3>Andha Yug — Staged Reading &amp; The Place We Built</h3>
+        <p>Dramaturgy for staged productions including Sarah Gancher's <em>The Place We Built</em> (Spring 2019). Arts practice alongside scholarly inquiry.</p>
+        <span class="w-arrow">Read →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PULLQUOTE -->
+  <div class="pullquote-block">
+    <blockquote>"Law and literature serve as important sites of reform and redress — each a form of testimony, each a demand for witness against the structures of caste and liberal incorporation."</blockquote>
+    <cite>— From Soumya's dissertation research</cite>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-h">Projects &amp; Programming</h2>
+    </div>
+    <div>
+      <div class="proj-row">
+        <div class="proj-icon">✦</div>
+        <div class="proj-body">
+          <h3>Translators Adda</h3>
+          <p>A public-facing translation workshop series co-directed by Soumya, focused on critical issues in South Asian politics and culture across the Chicagoland region. Brings together translators, writers, and activists working across languages and borders.</p>
+        </div>
+        <span class="proj-badge">Co-Director · Public Programming</span>
+      </div>
+      <div class="proj-row">
+        <div class="proj-icon">◈</div>
+        <div class="proj-body">
+          <h3>SpaceShift Collective — Starlight &amp; From Panther to Panther</h3>
+          <p>Collaborative projects raising awareness around caste violence and anti-caste cultural practice on Chicago's North Side, bridging artistic form with activist purpose.</p>
+        </div>
+        <span class="proj-badge">Collaborative Art · Chicago</span>
+      </div>
+      <div class="proj-row">
+        <div class="proj-icon">◇</div>
+        <div class="proj-body">
+          <h3>Race, Caste &amp; Colorism — Buffett Institute</h3>
+          <p>Programming artists' and writers' residencies for the Race, Caste, and Colorism project at Northwestern's Buffett Institute for Global Affairs.</p>
+        </div>
+        <span class="proj-badge">Residency Programming · Global Affairs</span>
+      </div>
+      <div class="proj-row">
+        <div class="proj-icon">○</div>
+        <div class="proj-body">
+          <h3>Public Humanities Graduate Practicum — Kaplan Institute</h3>
+          <p>Graduate assistant for the Practicum, mentoring scholars in translating academic research for public audiences. Formerly a 2022–23 Public Humanities Fellow.</p>
+        </div>
+        <span class="proj-badge">Kaplan Institute · Graduate Assistant</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FELLOWSHIPS -->
+  <section id="fellowships">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-h">Fellowships &amp; Roles</h2>
+    </div>
+    <table class="fellowships-table">
+      <tbody>
+        <tr><td class="ft-year">Current</td><td class="ft-name">Mellon Cluster Fellow — Comparative Race and Diaspora (CRD)</td><td class="ft-org">Northwestern University</td></tr>
+        <tr><td class="ft-year">Current</td><td class="ft-name">Graduate Assistant — Public Humanities Graduate Practicum</td><td class="ft-org">Kaplan Institute, NU</td></tr>
+        <tr><td class="ft-year">Current</td><td class="ft-name">Co-Director — Translators Adda Workshop Series</td><td class="ft-org">Chicagoland</td></tr>
+        <tr><td class="ft-year">2023–2024</td><td class="ft-name">Graduate Fellow — Council for Race and Ethnic Studies (CRES)</td><td class="ft-org">Northwestern University</td></tr>
+        <tr><td class="ft-year">2022–2023</td><td class="ft-name">Public Humanities Fellow</td><td class="ft-org">Northwestern University</td></tr>
+        <tr><td class="ft-year">Ongoing</td><td class="ft-name">Arts Programmer — Race, Caste, and Colorism Project</td><td class="ft-org">Buffett Institute for Global Affairs</td></tr>
+        <tr><td class="ft-year">2016–2020</td><td class="ft-name">B.A. in Literature and Drama</td><td class="ft-org">Bennington College, Vermont</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-left">
+      <p class="sec-label">06 · Get in Touch</p>
+      <h2>Let's<br/>Connect</h2>
+      <p>Based at Northwestern University in Evanston, Illinois. Open to correspondence on research, collaborative projects, translation work, and public programming.</p>
+      <div class="contact-link-row">
+        <a class="c-link" href="mailto:SoumyaShailendra2027@u.northwestern.edu"><span class="c-label">Email</span><span class="c-val">SoumyaShailendra2027@u.northwestern.edu</span></a>
+        <a class="c-link" href="https://scholar.google.com/citations?user=dZR3ZdYAAAAJ" target="_blank" rel="noopener"><span class="c-label">Scholar</span><span class="c-val">Google Scholar Profile</span></a>
+        <a class="c-link" href="https://medium.com/@soumyashailendra2027" target="_blank" rel="noopener"><span class="c-label">Medium</span><span class="c-val">@soumyashailendra2027</span></a>
+        <a class="c-link" href="https://www.linkedin.com/in/soumya-shailendra-5424b5167/" target="_blank" rel="noopener"><span class="c-label">LinkedIn</span><span class="c-val">soumya-shailendra-5424b5167</span></a>
+        <a class="c-link" href="https://complit.northwestern.edu/people/graduate-students/soumya-shailendra.html" target="_blank" rel="noopener"><span class="c-label">University</span><span class="c-val">Northwestern CLS Directory</span></a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="cr-stat"><div class="cr-stat-num">4</div><div class="cr-stat-label">Languages in the dissertation archive</div></div>
+      <div class="cr-stat"><div class="cr-stat-num">3+</div><div class="cr-stat-label">Public venues for published writing</div></div>
+      <div class="cr-stat"><div class="cr-stat-num">2</div><div class="cr-stat-label">Peer-reviewed academic journals</div></div>
+      <div class="cr-stat" style="border:none;"><div class="cr-stat-num">∞</div><div class="cr-stat-label">Commitment to anti-caste scholarship</div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Soumya Rachel Shailendra · PhD Candidate · Northwestern University</span>
+    <div class="footer-links">
+      <a href="mailto:SoumyaShailendra2027@u.northwestern.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=dZR3ZdYAAAAJ" target="_blank">Scholar</a>
+      <a href="https://medium.com/@soumyashailendra2027" target="_blank">Medium</a>
+      <a href="https://www.linkedin.com/in/soumya-shailendra-5424b5167/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '18px'; cursor.style.height = '18px';
+        ring.style.width = '52px'; ring.style.height = '52px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '10px'; cursor.style.height = '10px';
+        ring.style.width = '36px'; ring.style.height = '36px';
+      });
+    });
+  </script>
+</body>
+</html>
